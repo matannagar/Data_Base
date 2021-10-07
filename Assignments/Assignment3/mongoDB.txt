@@ -1,0 +1,39 @@
+db.books.insert([{"Book_name": "Anney", "authors": "Josh", "publisher": "yediot", "publishing_year":1990, "for_age" : 14, "rank": 5, "the_book":"once upon a time"},
+ {"Book_name": "Dora", "authors": "Yaara", "publisher": "KodKod","publishing_year":2000, "for_age" : 2, "rank": 12, "the_book":"dora and boots"},
+ {"Book_name": "The lion king", "authors": "Daniel", "publisher": "Disny", "publishing_year":1970, "for_age" : 10, "rank": 15, "the_book":"simba was a lion"},
+ {"Book_name": "PitterPhen", "authors": "Ruth Cohen", "publisher": "yediot", "publishing_year":1990, "for_age" : 14, "rank": 5, "the_book":"tinkerbell was very little"}])
+ 
+ **********************************************************************************************************************************************88888
+ 
+ results 1:
+ {
+        "_id" : ObjectId("60981dccafc51d001afb3109"),
+        "Book_name" : "Anney",
+        "authors" : "Josh",
+        "publisher" : "yediot",
+        "publishing_year" : 1990,
+        "for_age" : 14,
+        "rank" : 5,
+        "the_book" : "once upon a time"
+}
+{
+        "_id" : ObjectId("60981dccafc51d001afb310c"),
+        "Book_name" : "PitterPhen",
+        "authors" : "Ruth Cohen",
+        "publisher" : "yediot",
+        "publishing_year" : 1990,
+        "for_age" : 14,
+        "rank" : 5,
+        "the_book" : "tinkerbell was very little"
+}
+
+
+
+results 2:
+
+{ "_id" : 3, "value" : 2 }
+{ "_id" : 4, "value" : 4 }
+{ "_id" : 1, "value" : 2 }
+{ "_id" : 6, "value" : 1 }
+{ "_id" : 10, "value" : 1 }
+{ "_id" : 5, "value" : 2 }

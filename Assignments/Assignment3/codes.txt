@@ -1,0 +1,61 @@
+//MONGODB 1
+db.books.find({$or:[{$and:[{"for_age":{$gte:10}},{"publishing_year":{$lt:2000}}]},{$and:[{"authors":"Ruth Cohen"},{"rank":{$gte:3}}]}]}).pretty();  
+
+//MongoDB 2
+mapper = function () {
+  let words = this.the_book.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    var key = words[i].length;
+    emit(key, 1);
+  }
+};
+
+reducer = function (key, count) {
+  return Array.sum(count);
+};
+
+db.books.mapReduce(mapper, reducer, {
+  query: { publishing_year: { $ne: 2000 } },
+  out: "count_words",
+});
+
+//X-Pathk
+//country/@name[sum(../city/@num)>1000000]
+
+//elasticSearch
+
+//neo4j
+MATCH (n) WHERE n.address="Tel Aviv" and n.salary>=19999 WITH n ORDER BY n.name RETURN collect(n.name)
+
+MATCH (n)-[:friend*0..3]->(x) WHERE n.address="Tel Aviv" and n.salary>=19999 and x.salary>=19999 WITH n ORDER BY n.name RETURN collect(DISTINCT n.name)
+
+MATCH p=(n)-[:friend*..3]->(x) 
+WHERE n.address="Tel Aviv" and n.salary>=19999 
+		and all(x IN nodes(p) where x.salary>=19999) 
+WITH n ORDER BY n.name 
+RETURN collect(DISTINCT n.name)
+
+////
+MATCH (n)-[:friend*0..3]-(m)
+WHERE n.salary>= 19999 and n.address = "Tel Aviv"
+WITH n, collect(m) as nodes
+WHERE ALL(x IN nodes WHERE x.salary>= 19999)
+UNWIND nodes as m
+WITH m
+ORDER BY m.name
+RETURN collect(DISTINCT m.name)
+///
+
+/////זה גם עובד בדיוק כמו מה שעשית פשוט לי אישית יותר מובן
+MATCH (n)-[:friend*0..3]-(m)
+WHERE n.salary>= 19999 and n.address = "Tel Aviv"
+WITH n, collect(m) as nodes
+WHERE ALL(x IN nodes WHERE x.salary>= 19999)
+WITH n ORDER BY n.name
+RETURN collect(DISTINCT n.name)
+/////////////////////////////
+
+MATCH (n) WITH COLLECT(n) AS res 
+MATCH (x) WHERE ALL
+(x IN res WHERE (n)-[:friend*0..3]->(x)) RETURN n.name
